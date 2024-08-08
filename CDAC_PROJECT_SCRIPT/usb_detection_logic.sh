@@ -8,12 +8,13 @@ function check_usb_device() {
   vendor_id="483"    #CHANGE FOR DIFFERENT USB
   product_id="572b"  #CHANGE FOR DIFFERENT USB
   # Use lsusb -v for more detailed information
-  device_info=$(lsusb -d $vendor_id:$product_id)
+  device_info=$(lsusb -d $vendor_id:$product_id) #by running lsusb command checking if the USB is connected or not.
   # echo "$device_info"
   if [[ -z "$device_info" ]]; then
     if [[ "$flag" ]]; then
       echo "Device is disconnected"
-      killed=$(killall entry)
+      killed=$(kill -9 $flag) #Killing the PID
+      #checking if the PID is killed or not.
       if [[ -z "$killed" ]]; then
         echo "Killed $flag"
       else
@@ -23,7 +24,7 @@ function check_usb_device() {
   else
     if [[ -z "$flag" ]]; then
         echo "Device is connected"
-        ./entry >/dev/null 2>&1 & #running the program in current directory.
+        ./entry >/dev/null 2>&1 & #running the program in current directory & output it in a null buffer.
     fi
   fi
 } #function check usb device ends
