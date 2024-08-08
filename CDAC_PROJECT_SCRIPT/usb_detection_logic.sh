@@ -1,11 +1,12 @@
 #!/bin/bash
 
-#CORRECTED PROGRAM
+#NOTE: Run this script from another script name "usb_detection_fire.sh" so as to see the output of the script in a net terminal.
+#"usb_detection_fire.sh" is in the same directory
 
 # Function to check for a specific USB HID device
 function check_usb_device() {
-  vendor_id="483"
-  product_id="572b"
+  vendor_id="483"    #CHANGE FOR DIFFERENT USB
+  product_id="572b"  #CHANGE FOR DIFFERENT USB
   # Use lsusb -v for more detailed information
   device_info=$(lsusb -d $vendor_id:$product_id)
   # echo "$device_info"
